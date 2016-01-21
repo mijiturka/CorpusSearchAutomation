@@ -17,10 +17,17 @@ with open("result.csv", "wb") as outfile:
 			with open(file, "rb") as infile:
 				inf = infile.readlines()
 				for line in inf:
-					line = year + ", " + line
-					if line.find("x") > -1:
+					line = line.strip()
+					
+					#line contains x
+					#if line.find("x") > -1:
+
+					#line matches x
+					if line == "x":
 						num_x = num_x+1
-						print(filename + "-" + line)
+						print(year + ", " + line + ", " + filename)
+
+					line = year + ", " + line
 					outfile.write(line)
 print(num_x)
 
