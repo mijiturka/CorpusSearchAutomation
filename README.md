@@ -1,7 +1,6 @@
-Mixxx sql requests to get history playlists:
-mixxx_sql.sql
+Simple automatisation scripts for CorpusSearch (http://corpussearch.sourceforge.net/)
 
-CorpusSearch automatisation scripts:
-corpussearch.cmd        -> Runs corpus search for all files in a directory, produces separate output files. 
-corpussearch_findx.py   -> Adds year prefix, aggregates results into .csv file, counts and prints x tokens.
-Call in directory above icepahc-v0.9
+corpussearch.cmd        -> Runs corpus search for all files in a directory, produces separate output files. (Windows)
+corpussearch_findx.py   -> Adds year prefices, aggregates results into .csv file, counts and prints x tokens.
+
+Call in directory above the corpus.
