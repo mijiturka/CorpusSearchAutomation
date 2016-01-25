@@ -48,7 +48,7 @@ with open(result_file, "wb") as outfile:
 					#if line.find("x") > -1:
 
 					#line matches x
-					if line == "x":
+					if line == token_searched:
 						num_x = num_x+1
 						print(year_prefix + ", " + line + ", " + filename)
 	
