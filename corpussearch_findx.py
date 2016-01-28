@@ -7,9 +7,6 @@
 
 import glob, re, operator
 
-def printable_token_info(yt, tp):
-	return str(yt[0][0]) + ", " + str(yt[0][1]) + ", " + str(yt[1]) + ", " + str(tp)
-
 #queries_folder = "icepahc-v0.9\\queries\\"		#Windows
 queries_folder = "MCVF_parsed/queries/"		
 result_file = "result.csv"
@@ -27,7 +24,7 @@ print("Occurrences of " + token_searched + ":")
 with open(result_file, "wb") as outfile:
 	for file in read_files:
 		#filename = file.split("\\")[-1]		#Windows
-		filename = file.split("/")[-1]
+		filename = file.split("/")[-1]			#Linux
 		file_isdata = False
 
 		years = re.match(r"([0-9][0-9][0-9][0-9])_([0-9][0-9][0-9][0-9])", filename)
@@ -81,8 +78,10 @@ print(total_tokens)
 print("\n")
 
 print("Year, token, count, as percent of tokens for this year:")
-counts_sorted = sorted(counts.items(), key=lambda x: (x[0][1], x[0][0]))
-for year_token in counts_sorted:
-	token_percent = float(year_token[1])/total_tokens[year_token[0][0]] *100
-	print(printable_token_info(year_token, token_percent))
+counts_sorted = sorted(counts.items(), key=lambda i: (i[0][1], i[0][0]))
+for ((year, token), count) in counts_sorted:
+	token_percent = float(count)/total_tokens[year] *100
+	info = [year, token, count, token_percent]
+	info_string = ", ".join(str(i) for i in info)
+	print(info_string)
 	
