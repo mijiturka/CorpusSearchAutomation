@@ -15,6 +15,8 @@ query_file_extension = ".cod.ooo"
 
 result_file = "result.csv"
 token_searched = "x"
+regression_file = "regression.csv"
+do_regression = True
 
 
 import glob, re, os
@@ -81,9 +83,24 @@ print("\n")
 
 print("Year, token, count, as percent of tokens for this year:")
 counts_sorted = sorted(counts.items(), key=lambda i: (i[0][1], i[0][0]))
+tokens = []
 for ((year, token), count) in counts_sorted:
+	tokens.append(token)
 	token_percent = float(count)/total_tokens[year] *100
 	info = [year, token, count, token_percent]
 	info_string = ", ".join(str(i) for i in info)
 	print(info_string)
-	
+tokens = set(tokens)
+
+if do_regression:
+	for curr_token in tokens:
+		ext_id = regression_file.find('.csv')
+		curr_file = regression_file[:ext_id] + "_" + curr_token + regression_file[ext_id:]
+		with open(curr_file, "wb") as outfile:
+			for ((year, token), count) in counts_sorted:
+				for i in range (0, count):
+					if token == curr_token:
+						line = year + ", 1"
+					else:
+						line = year + ", 0"
+					outfile.write(line+"\n")
