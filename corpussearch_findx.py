@@ -97,6 +97,7 @@ if do_regression:
 		ext_id = regression_file.find('.csv')
 		curr_file = regression_file[:ext_id] + "_" + curr_token + regression_file[ext_id:]
 		with open(curr_file, "wb") as outfile:
+			outfile.write("year, token, count\n")
 			for ((year, token), count) in counts_sorted:
 				for i in range (0, count):
 					if token == curr_token:
